@@ -1,9 +1,13 @@
-"use client"
+"use client";
 import RotatingText from "@/app/Components/TextEffect";
 
 export default function Home() {
-  return <div className="">the no auth part
-  
-  <div><RotatingText/></div>
-  </div>;
+  return (
+    <div className="">
+      the no auth part
+      <div>
+        <RotatingText />
+      </div>
+    </div>
+  );
 }
