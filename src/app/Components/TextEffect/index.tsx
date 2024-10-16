@@ -8,7 +8,7 @@ const RotatingText: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 500); // Change word every 2 seconds
+    }, 1000); // Change word every 2 seconds
 
     return () => clearInterval(interval);
   }, []);
