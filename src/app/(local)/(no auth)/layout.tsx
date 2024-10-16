@@ -1,4 +1,4 @@
-import Navbar from "@/app/NavBar";
+import Navbar from "@/app/(local)/(no auth)/NavBar";
 import React from "react";
 
 interface NoAuthLayoutProps {
@@ -6,7 +6,10 @@ interface NoAuthLayoutProps {
 }
 
 export default async function NoAuthLayout({ children }: NoAuthLayoutProps) {
-  return <div>
-    <Navbar/>
-    {children}</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 }
