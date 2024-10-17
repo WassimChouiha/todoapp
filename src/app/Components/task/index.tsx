@@ -23,6 +23,7 @@ const TodoList: React.FC = () => {
   });
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [filter, setFilter] = useState<"All" | "To Do" | "Done">("All");
+  const [priorityFilter, setPriorityFilter] = useState<"All" | "Low" | "Medium" | "High">("All");
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
@@ -64,9 +65,8 @@ const TodoList: React.FC = () => {
   };
 
   const filteredTasks = tasks.filter((task) => {
-    if (filter === "All") return true;
-    if (filter === "To Do") return task.status === "To Do";
-    if (filter === "Done") return task.status === "Done";
+    if (filter !== "All" && task.status !== filter) return false;
+    if (priorityFilter !== "All" && task.priority !== priorityFilter) return false;
     return true;
   });
   const handleCreateTask = () => {
@@ -99,8 +99,23 @@ const TodoList: React.FC = () => {
           <option value="To Do">To Do</option>
           <option value="Done">Done</option>
         </select>
+        <label className="mr-2 ml-4">Filter by Priority:</label>
+          <select
+            value={priorityFilter}
+            onChange={(e) =>
+              setPriorityFilter(e.target.value as "All" | "Low" | "Medium" | "High")
+            }
+            className="p-2 border rounded"
+          >
+            <option value="All">All</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
       </div>
-
+      <div>
+          
+        </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {(["To Do", "In Progress", "Done"] as const).map((status) => (
           <Card
@@ -133,9 +148,15 @@ const TodoList: React.FC = () => {
                             })
                           }
                         >
-                          <option value="Low">Low </option>
-                          <option value="Medium">Medium </option>
-                          <option value="High">High</option>
+                          <option className="bg-gray-300" value="Low">
+                            Low
+                          </option>
+                          <option className="bg-orange-300" value="Medium">
+                            Medium
+                          </option>
+                          <option className="bg-red-300" value="High">
+                            High
+                          </option>
                         </select>
                         <textarea
                           value={editingTask.deadline}
@@ -179,7 +200,15 @@ const TodoList: React.FC = () => {
                     ) : (
                       <div>
                         <div className="flex justify-between border-b-2 gap-2 mb-2">
-                          <span className="flex items-center">
+                          <span
+                            className={`flex p-1 rounded-lg mb-2 ${
+                              task.priority === "Low"
+                                ? "bg-gray-300"
+                                : task.priority === "Medium"
+                                ? "bg-orange-300"
+                                : "bg-red-300"
+                            }`}
+                          >
                             <FlagIcon />
                             {task.priority}
                           </span>
