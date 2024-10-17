@@ -1,8 +1,15 @@
+"use client";
 import React, { useState, useEffect } from "react";
-import { Save, Trash2, PlusCircleIcon, PenBoxIcon, FlagIcon } from "lucide-react";
+import {
+  Save,
+  Trash2,
+  PlusCircleIcon,
+  PenBoxIcon,
+  FlagIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Task } from "../CreateTask";
+import { Task } from "../CreatingTask";
 
 const LOCAL_STORAGE_KEY = "todo-tasks";
 
@@ -62,12 +69,18 @@ const TodoList: React.FC = () => {
     if (filter === "Done") return task.status === "Done";
     return true;
   });
+  const handleCreateTask = () => {
+    window.open("/CreateTask", "_blank");
+  };
 
   return (
     <div className="w-[1200px] mx-[20%] p-4 mt-8">
       <div className="flex items-center text-gray-900 justify-between mt-8 mb-6">
         <h2 className="text-4xl font-bold">My Tasks</h2>
-        <Button className="bg-lime-500 hover:bg-lime-600 gap-2">
+        <Button
+          onClick={handleCreateTask}
+          className="bg-lime-500 hover:bg-lime-600 gap-2"
+        >
           <PlusCircleIcon />
           Create new Task
         </Button>
@@ -111,16 +124,19 @@ const TodoList: React.FC = () => {
                   >
                     {editingTask && editingTask.id === task.id ? (
                       <div>
-                        <select 
+                        <select
                           value={editingTask.priority}
                           onChange={(e) =>
                             setEditingTask({
                               ...editingTask,
                               priority: e.target.value,
                             })
-                          }><option value="Low">Low </option>
+                          }
+                        >
+                          <option value="Low">Low </option>
                           <option value="Medium">Medium </option>
-                          <option value="High">High</option></select>
+                          <option value="High">High</option>
+                        </select>
                         <input
                           type="text"
                           value={editingTask.title}
@@ -151,9 +167,14 @@ const TodoList: React.FC = () => {
                       </div>
                     ) : (
                       <div>
-                        <div className="flex justify-end border-b-2 gap-2 mb-2">
-                        <span className="flex items-center"><FlagIcon/>{task.priority}</span> 
-                        
+                        <div className="flex justify-between border-b-2 gap-2 mb-2">
+                          <span className="flex items-center">
+                            <FlagIcon />
+                            {task.priority}
+                          </span>
+                          <span className="flex items-center">
+                            {task.deadline}
+                          </span>
                           <Button
                             onClick={() => removeTask(task.id)}
                             variant="secondary"
