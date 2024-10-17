@@ -137,6 +137,17 @@ const TodoList: React.FC = () => {
                           <option value="Medium">Medium </option>
                           <option value="High">High</option>
                         </select>
+                        <textarea
+                          value={editingTask.deadline}
+                          onChange={(e) =>
+                            setEditingTask({
+                              ...editingTask,
+                              deadline: e.target.value,
+                            })
+                          }
+                          className="w-full p-1 border rounded mb-2 resize-none"
+                          rows={3}
+                        />
                         <input
                           type="text"
                           value={editingTask.title}
