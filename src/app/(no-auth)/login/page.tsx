@@ -7,10 +7,11 @@ export default function Login() {
   return (
     <div className="">
       <div className="w-full p-8 flex flex-col items-center">
-        <Input placeholder="UserName" className="w-2/12 m-2" />
+        <Input placeholder="UserName" className="w-2/12 mt-8 mb-2" />
         <Input type="password" placeholder="Password" className="w-2/12 m-2" />
-        <div className="">
+        <div>
           <Button
+            className="bg-lime-500 hover:bg-lime-600"
             type="submit"
             onClick={() => {
               console.log("its working!!");
@@ -18,8 +19,11 @@ export default function Login() {
           >
             Log in
           </Button>
-          <Link className="ml-24" href="/">
-            click here to sign up
+          <Link
+            className="ml-24 text-lime-500 hover:text-lime-600"
+            href="/register"
+          >
+            Click here to Register
           </Link>
         </div>
       </div>

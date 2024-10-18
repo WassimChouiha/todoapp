@@ -1,4 +1,4 @@
-import Navbar from "@/app/(local)/(no auth)/NavBar";
+import Navbar from "@/app/(no-auth)/NavBar";
 import React from "react";
 
 interface NoAuthLayoutProps {

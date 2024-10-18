@@ -1,29 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Save,
-  Trash2,
-  PlusCircleIcon,
-  PenBoxIcon,
-  FlagIcon,
-} from "lucide-react";
+import { Save, Trash2, PlusCircleIcon, PenBoxIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Task } from "../CreatingTask";
+import Link from "next/link";
 
 const LOCAL_STORAGE_KEY = "todo-tasks";
 
 const TodoList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+
     if (savedTasks) {
       return JSON.parse(savedTasks);
     }
     return [];
   });
+
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [filter, setFilter] = useState<"All" | "To Do" | "Done">("All");
-  const [priorityFilter, setPriorityFilter] = useState<"All" | "Low" | "Medium" | "High">("All");
+  const [priorityFilter, setPriorityFilter] = useState<
+    "All" | "Low" | "Medium" | "High"
+  >("All");
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
@@ -66,24 +65,22 @@ const TodoList: React.FC = () => {
 
   const filteredTasks = tasks.filter((task) => {
     if (filter !== "All" && task.status !== filter) return false;
-    if (priorityFilter !== "All" && task.priority !== priorityFilter) return false;
+    if (priorityFilter !== "All" && task.priority !== priorityFilter)
+      return false;
     return true;
   });
-  const handleCreateTask = () => {
-    window.open("/CreateTask", "_blank");
-  };
 
   return (
     <div className="w-[1200px] mx-[20%] p-4 mt-8">
       <div className="flex items-center text-gray-900 justify-between mt-8 mb-6">
-        <h2 className="text-4xl font-bold">My Tasks</h2>
-        <Button
-          onClick={handleCreateTask}
-          className="bg-lime-500 hover:bg-lime-600 gap-2"
+        <h2 className="text-4xl text-lime-500 font-bold">My Tasks</h2>
+        <Link
+          href="/create-task"
+          className="text-white p-2 gap-2 flex justify-center ml-2 rounded bg-lime-500 hover:bg-lime-600 "
         >
           <PlusCircleIcon />
           Create new Task
-        </Button>
+        </Link>
       </div>
 
       <div className="mb-4">
@@ -100,22 +97,22 @@ const TodoList: React.FC = () => {
           <option value="Done">Done</option>
         </select>
         <label className="mr-2 ml-4">Filter by Priority:</label>
-          <select
-            value={priorityFilter}
-            onChange={(e) =>
-              setPriorityFilter(e.target.value as "All" | "Low" | "Medium" | "High")
-            }
-            className="p-2 border rounded"
-          >
-            <option value="All">All</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
+        <select
+          value={priorityFilter}
+          onChange={(e) =>
+            setPriorityFilter(
+              e.target.value as "All" | "Low" | "Medium" | "High"
+            )
+          }
+          className="p-2 border rounded"
+        >
+          <option value="All">All</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
       </div>
-      <div>
-          
-        </div>
+      <div></div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {(["To Do", "In Progress", "Done"] as const).map((status) => (
           <Card
@@ -201,7 +198,7 @@ const TodoList: React.FC = () => {
                       <div>
                         <div className="flex justify-between border-b-2 gap-2 mb-2">
                           <span
-                            className={`flex p-1 rounded-lg mb-2 ${
+                            className={`flex p-2 rounded-lg mb-2 ${
                               task.priority === "Low"
                                 ? "bg-gray-300"
                                 : task.priority === "Medium"
@@ -209,7 +206,6 @@ const TodoList: React.FC = () => {
                                 : "bg-red-300"
                             }`}
                           >
-                            <FlagIcon />
                             {task.priority}
                           </span>
                           <span className="flex items-center">
@@ -219,7 +215,7 @@ const TodoList: React.FC = () => {
                             onClick={() => removeTask(task.id)}
                             variant="secondary"
                             size="sm"
-                            className="bg-red-500 mb-2"
+                            className="text-white bg-red-500 mb-2 hover:bg-red-600"
                           >
                             <Trash2 size={18} />
                           </Button>
@@ -227,7 +223,7 @@ const TodoList: React.FC = () => {
                             onClick={() => startEditing(task)}
                             variant="secondary"
                             size="sm"
-                            className="mr-1 bg-lime-500"
+                            className="mr-1 text-white bg-lime-500 hover:bg-lime-600"
                           >
                             <PenBoxIcon size={18} />
                           </Button>

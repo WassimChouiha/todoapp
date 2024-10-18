@@ -1,6 +1,8 @@
 "use client";
 import { Card, CardTitle } from "@/components/ui/card";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface Task {
@@ -9,9 +11,11 @@ export interface Task {
   description: string;
   deadline: string;
   status: "To Do" | "In Progress" | "Done";
-  priority: "Low" | "Medium" | "High";
+  priority: string;
 }
+
 const LOCAL_STORAGE_KEY = "todo-tasks";
+
 const CreateTask: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -20,22 +24,28 @@ const CreateTask: React.FC = () => {
     }
     return [];
   });
+
+  const router = useRouter();
+
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1
     const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return `${day}-${month}-${year}`;
   };
+
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
     deadline: getCurrentDate(),
     priority: "Low" as Task["priority"],
   });
+
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
+
   const addTask = () => {
     if (newTask.title.trim()) {
       setTasks((prevTasks) => [
@@ -46,10 +56,17 @@ const CreateTask: React.FC = () => {
           status: "To Do",
         },
       ]);
-     
-      setNewTask({ title: "", description: "",  deadline: getCurrentDate(), priority: "Low" });
+
+      setNewTask({
+        title: "",
+        description: "",
+        deadline: getCurrentDate(),
+        priority: "Low",
+      });
+      router.push("/my-task");
     }
   };
+
   return (
     <>
       <h2 className="flex justify-center font-bold text-5xl text-gray-900 mt-8">
@@ -77,7 +94,6 @@ const CreateTask: React.FC = () => {
         />
         <textarea
           value={newTask.deadline}
-         
           onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
           className="w-[568px] h-[67px] mx-3 my-2 p-2 border rounded mb-2 resize-none"
           placeholder="Enter Deadline"
@@ -98,12 +114,17 @@ const CreateTask: React.FC = () => {
           <option value="High">High</option>
         </select>
         <div className="flex my-[326px]">
+          <Link
+            className="bg-red-500 text-white p-2 flex w-full justify-center ml-2 rounded hover:bg-red-600"
+            href="/my-task"
+          >
+            Cancel
+          </Link>
           <button
             onClick={addTask}
-            className="bg-lime-500 text-white p-2 rounded hover:bg-lime-600 w-[568px] flex mx-3 justify-center"
+            className="bg-lime-500 text-white p-2 rounded hover:bg-lime-600 w-full flex mx-3 justify-center"
           >
-            <PlusCircle size={24} className="mr-2" />
-            Create new Task
+            Save
           </button>
         </div>
       </Card>
