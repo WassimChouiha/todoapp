@@ -1,8 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/providers/AuthProvider";
 import React from "react";
 
 const Navbar: React.FC = () => {
+  const { logout } = useAuth();
   return (
     <div className="w-[1200px] mx-[20%] ">
       <div className="border-b-2 border-transparent">
@@ -15,11 +17,10 @@ const Navbar: React.FC = () => {
               >
                 MyTask
               </a>
-              <Button
-                type="submit"
+              <Button                
                 className="px-4 py-2 mt-2 text-xl bg-red-500 font-semibold rounded-lg  hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:shadow-outline"
                 onClick={() => {
-                  console.log("ez");
+                  logout();
                 }}
               >
                 Logout

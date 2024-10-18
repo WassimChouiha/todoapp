@@ -75,7 +75,7 @@ const TodoList: React.FC = () => {
       <div className="flex items-center text-gray-900 justify-between mt-8 mb-6">
         <h2 className="text-4xl text-lime-500 font-bold">My Tasks</h2>
         <Link
-          href="/create-task"
+          href="/dashboard/create-task"
           className="text-white p-2 gap-2 flex justify-center ml-2 rounded bg-lime-500 hover:bg-lime-600 "
         >
           <PlusCircleIcon />
@@ -132,7 +132,7 @@ const TodoList: React.FC = () => {
                     key={task.id}
                     draggable
                     onDragStart={(e) => onDragStart(e, task.id)}
-                    className="bg-white p-2 mb-2 rounded shadow cursor-pointer"
+                    className="bg-white overflow-hidden p-2 mb-2 rounded shadow cursor-pointer"
                   >
                     {editingTask && editingTask.id === task.id ? (
                       <div>
