@@ -1,8 +1,7 @@
 "use client";
 import { Card, CardTitle } from "@/components/ui/card";
-import { PlusCircle } from "lucide-react";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export interface Task {
@@ -30,7 +29,7 @@ const CreateTask: React.FC = () => {
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1
+    const month = String(today.getMonth() + 1).padStart(2, "0"); 
     const day = String(today.getDate()).padStart(2, "0");
     return `${day}-${month}-${year}`;
   };

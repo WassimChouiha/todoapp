@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./NavBar";
 
+
 interface NoAuthLayoutProps {
   children: React.ReactNode;
 }
