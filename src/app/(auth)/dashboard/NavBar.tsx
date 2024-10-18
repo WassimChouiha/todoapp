@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
             <nav className="flex justify-between">              
               <a
                 className="px-4 py-2 mt-2 text-xl text-white bg-lime-500 font-semibold rounded-lg  hover:bg-lime-600 focus:bg-lime-600 focus:outline-none focus:shadow-outline"
-                href="/my-task"
+                href="/dashboard/my-task"
               >
                 MyTask
               </a>

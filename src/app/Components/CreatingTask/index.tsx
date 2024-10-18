@@ -63,7 +63,7 @@ const CreateTask: React.FC = () => {
         deadline: getCurrentDate(),
         priority: "Low",
       });
-      router.push("/my-task");
+      router.push("/dashboard/my-task");
     }
   };
 
@@ -116,7 +116,7 @@ const CreateTask: React.FC = () => {
         <div className="flex my-[326px]">
           <Link
             className="bg-red-500 text-white p-2 flex w-full justify-center ml-2 rounded hover:bg-red-600"
-            href="/my-task"
+            href="/dashboard/my-task"
           >
             Cancel
           </Link>
