@@ -1,6 +1,6 @@
 "use client";
 
-import CreateTask from "@/app/Components/CreatingTask";
+import CreateTask from "../../../Components/CreatingTask";
 
 export default function Task() {
   return (
