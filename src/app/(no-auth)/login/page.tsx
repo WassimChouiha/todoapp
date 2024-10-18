@@ -53,7 +53,7 @@ export default function Login() {
             className="ml-24 text-lime-500 hover:text-lime-600"
             href="/register"
           >
-          don't have an account yet?
+          dont have an account yet?
           </Link>
         </div>
       </div>
