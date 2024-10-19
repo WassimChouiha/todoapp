@@ -28,6 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     checkUserSession();
+    // eslint-disable-next-line react-hooks/exhaustive-dep
   }, []);
 
   const setCookie = (name: string, value: string, days: number) => {

@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import { Save, Trash2, PlusCircleIcon, PenBoxIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Task } from "../CreatingTask";
+import { Task } from "../CreateTask";
 import Link from "next/link";
 
 const LOCAL_STORAGE_KEY = "todo-tasks";
 
-const TodoList: React.FC = () => {
+const Tasks: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -16,10 +16,6 @@ const TodoList: React.FC = () => {
   const [priorityFilter, setPriorityFilter] = useState<
     "All" | "Low" | "Medium" | "High"
   >("All");
-
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
-  // }, [tasks]);
 
   useEffect(() => {
     const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -82,7 +78,7 @@ const TodoList: React.FC = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   };
 
-  const filteredTasks = tasks?.filter((task) => {
+  const filteredTasks = tasks.filter((task) => {
     if (filter !== "All" && task.status !== filter) return false;
     if (priorityFilter !== "All" && task.priority !== priorityFilter)
       return false;
@@ -265,4 +261,4 @@ const TodoList: React.FC = () => {
   );
 };
 
-export default TodoList;
+export default Tasks;

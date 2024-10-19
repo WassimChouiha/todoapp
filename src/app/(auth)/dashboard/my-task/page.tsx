@@ -1,10 +1,10 @@
 "use client";
-import TodoList from "../../../Components/Task";
+import Tasks from '@/app/Components/Tasks';
 
 export default function Task() {
   return (
     <div className="w-full ">
-      <TodoList />
+      <Tasks />
     </div>
   );
 }
