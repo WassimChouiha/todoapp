@@ -9,14 +9,7 @@ import Link from "next/link";
 const LOCAL_STORAGE_KEY = "todo-tasks";
 
 const TodoList: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
-
-    if (savedTasks) {
-      return JSON.parse(savedTasks);
-    }
-    return [];
-  });
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [filter, setFilter] = useState<"All" | "To Do" | "Done">("All");
@@ -24,12 +17,24 @@ const TodoList: React.FC = () => {
     "All" | "Low" | "Medium" | "High"
   >("All");
 
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+  // }, [tasks]);
+
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
-  }, [tasks]);
+    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+  }, []);
 
   const removeTask = (id: string) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    const savedTasks: Task[] = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
+    );
+    const newTasks = savedTasks.filter((task) => task.id !== id);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   };
 
   const startEditing = (task: Task) => {
@@ -43,6 +48,13 @@ const TodoList: React.FC = () => {
           task.id === editingTask.id ? editingTask : task
         )
       );
+      const savedTasks: Task[] = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
+      );
+      const newTasks = savedTasks.map((task) =>
+        task.id === editingTask.id ? editingTask : task
+      );
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
       setEditingTask(null);
     }
   };
@@ -61,9 +73,16 @@ const TodoList: React.FC = () => {
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id === taskId ? { ...task, status } : task))
     );
+    const savedTasks: Task[] = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
+    );
+    const newTasks = savedTasks.map((task) =>
+      task.id === taskId ? { ...task, status } : task
+    );
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredTasks = tasks?.filter((task) => {
     if (filter !== "All" && task.status !== filter) return false;
     if (priorityFilter !== "All" && task.priority !== priorityFilter)
       return false;

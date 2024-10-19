@@ -17,19 +17,26 @@ const LOCAL_STORAGE_KEY = "todo-tasks";
 
 const CreateTask: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (savedTasks) {
-      return JSON.parse(savedTasks);
-    }
+    // const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    // if (savedTasks) {
+    //   return JSON.parse(savedTasks);
+    // }
     return [];
   });
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+  }, []);
 
   const router = useRouter();
 
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); 
+    const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0");
     return `${day}-${month}-${year}`;
   };
@@ -41,20 +48,25 @@ const CreateTask: React.FC = () => {
     priority: "Low" as Task["priority"],
   });
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
-  }, [tasks]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+  // }, [tasks]);
 
   const addTask = () => {
     if (newTask.title.trim()) {
-      setTasks((prevTasks) => [
-        ...prevTasks,
-        {
-          id: String(Date.now()),
-          ...newTask,
-          status: "To Do",
-        },
-      ]);
+      const task: Task = {
+        id: String(Date.now()),
+        ...newTask,
+        status: "To Do",
+      };
+      
+      setTasks((prevTasks) => [...prevTasks, task]);
+      
+      const savedTasks: Task[] = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
+      );
+      const newTasks = savedTasks.push(task);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
 
       setNewTask({
         title: "",

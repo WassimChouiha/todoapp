@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
                 className="px-4 py-2 mt-2 text-3xl flex items-center gap-2 font-semibold rounded-lg text-lime-600 bg-transparent focus:outline-none focus:shadow-outline"
                 href="/"
               >
-                <img src="./Vector.svg" />
+                {/* <img src="./Vector.svg" /> */}
                 Lists
               </Link>
               <Link

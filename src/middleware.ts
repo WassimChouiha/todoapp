@@ -4,12 +4,14 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('user')?.value;
   
-
+  console.log("middleware",currentUser)
   if (request.nextUrl.pathname.startsWith('/dashboard') && !currentUser) {
+    console.log("dashboard")
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
   if (request.nextUrl.pathname === '/login' && currentUser) {
+    console.log("login")
     return NextResponse.redirect(new URL('/dashboard/my-task', request.url));
   }
 
@@ -17,6 +19,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: "/",
   
 };
