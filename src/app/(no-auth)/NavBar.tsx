@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const Navbar: React.FC = () => {
                 className="px-4 py-2 mt-2 text-3xl flex items-center gap-2 font-semibold rounded-lg text-lime-600 bg-transparent focus:outline-none focus:shadow-outline"
                 href="/"
               >
-                {/* <img src="./Vector.svg" /> */}
+                <Image width={50} height={50} alt="logo"  src="./Vector.svg" />
                 Lists
               </Link>
               <Link

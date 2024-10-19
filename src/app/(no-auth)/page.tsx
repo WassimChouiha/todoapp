@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -13,7 +14,10 @@ export default function Home() {
           after today. Sign up for free access
         </h5>
         <div className="mt-8 flex gap-8">
-          <Link href="/register" className="text-xl p-2 rounded bg-lime-500 hover:bg-lime-600">
+          <Link
+            href="/register"
+            className="text-xl p-2 rounded bg-lime-500 hover:bg-lime-600"
+          >
             Register
           </Link>
           <Link
@@ -25,7 +29,7 @@ export default function Home() {
         </div>
       </div>
 
-      <img src="./Laptop.svg" />
+      <Image width={650} height={250} src="./Laptop.svg" alt="laptop" />
     </div>
   );
 }

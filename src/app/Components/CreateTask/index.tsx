@@ -1,5 +1,6 @@
 "use client";
 import { Card, CardTitle } from "@/components/ui/card";
+import { getCurrentDate } from "@/utils/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,13 +17,15 @@ export interface Task {
 const LOCAL_STORAGE_KEY = "todo-tasks";
 
 const CreateTask: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    // const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
-    // if (savedTasks) {
-    //   return JSON.parse(savedTasks);
-    // }
-    return [];
+  const [, setTasks] = useState<Task[]>([]);
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    deadline: getCurrentDate(),
+    priority: "Low" as Task["priority"],
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -31,27 +34,6 @@ const CreateTask: React.FC = () => {
     }
   }, []);
 
-  const router = useRouter();
-
-  const getCurrentDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${day}-${month}-${year}`;
-  };
-
-  const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
-    deadline: getCurrentDate(),
-    priority: "Low" as Task["priority"],
-  });
-
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
-  // }, [tasks]);
-
   const addTask = () => {
     if (newTask.title.trim()) {
       const task: Task = {
@@ -59,14 +41,14 @@ const CreateTask: React.FC = () => {
         ...newTask,
         status: "To Do",
       };
-      
+
       setTasks((prevTasks) => [...prevTasks, task]);
-      
+
       const savedTasks: Task[] = JSON.parse(
         localStorage.getItem(LOCAL_STORAGE_KEY) || "[]"
       );
-      const newTasks = savedTasks.push(task);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
+      savedTasks.push(task);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedTasks));
 
       setNewTask({
         title: "",
@@ -74,6 +56,7 @@ const CreateTask: React.FC = () => {
         deadline: getCurrentDate(),
         priority: "Low",
       });
+
       router.push("/dashboard/my-task");
     }
   };
