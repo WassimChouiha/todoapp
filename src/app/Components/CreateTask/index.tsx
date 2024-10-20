@@ -66,15 +66,15 @@ const CreateTask: React.FC = () => {
       <h2 className="flex justify-center font-bold text-5xl text-gray-900 mt-8">
         Create new task
       </h2>
-      <Card className="mt-8 bg-gray-100 w-[600px] h-[782px] ml-[35%]">
+      <Card className="mt-8 bg-gray-100 w-4/12 max-h-screen mx-auto">
         <CardTitle className="flex justify-center my-2 font-bold text-xl">
-          <h5>To do</h5>
+          <p>To do</p>
         </CardTitle>
         <input
           type="text"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="w-[568px] h-14 my-2 mx-3 border p-2 rounded mb-2 gap-2"
+          className="w-11/12 h-10 my-2 mx-3 border p-2 rounded mb-2 gap-2"
           placeholder="Enter a new task title"
         />
         <textarea
@@ -82,14 +82,14 @@ const CreateTask: React.FC = () => {
           onChange={(e) =>
             setNewTask({ ...newTask, description: e.target.value })
           }
-          className="w-[568px] h-[120px] mx-3 my-2 p-2 border rounded mb-2 resize-none"
+          className="w-11/12 h-32 mx-3 my-2 p-2 border rounded mb-2 resize-none"
           placeholder="Enter task description"
           rows={3}
         />
         <textarea
           value={newTask.deadline}
           onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
-          className="w-[568px] h-[67px] mx-3 my-2 p-2 border rounded mb-2 resize-none"
+          className="w-11/12 h-16 mx-3 my-2 p-2 border rounded mb-2 resize-none"
           placeholder="Enter Deadline"
           rows={3}
         />
@@ -101,13 +101,13 @@ const CreateTask: React.FC = () => {
               priority: e.target.value as Task["priority"],
             })
           }
-          className="w-[568px] h-12 mx-3 p-2 border rounded mb-2"
+          className="w-11/12 h-12 mx-3 p-2 border rounded mb-2"
         >
           <option value="Low">Low </option>
           <option value="Medium">Medium </option>
           <option value="High">High</option>
         </select>
-        <div className="flex my-[326px]">
+        <div className="flex mt-60 mb-2">
           <Link
             className="bg-red-500 text-white p-2 flex w-full justify-center ml-2 rounded hover:bg-red-600"
             href="/dashboard/my-task"
