@@ -13,6 +13,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const manrope = localFont({
+  src: "/fonts/Manrope-VariableFont_wght.ttf",
+  variable: "--font-manrope",
+  weight: "100 900",
+});
 
 export default function RootLayout({
   children,
@@ -22,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} antialiased` }
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

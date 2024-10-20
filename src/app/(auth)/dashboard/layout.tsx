@@ -8,7 +8,7 @@ interface NoAuthLayoutProps {
 
 export default async function NoAuthLayout({ children }: NoAuthLayoutProps) {
   return (
-    <div>
+    <div className="font-manrope">
       <Navbar />
       {children}
     </div>
