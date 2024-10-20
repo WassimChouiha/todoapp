@@ -5,6 +5,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import Link from "next/link";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Image from "next/image";
 
 interface IFormInput {
   username: string;
@@ -29,19 +30,23 @@ export default function Register() {
     if (!success) setError(true);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-full p-8 flex flex-col items-center">
-      <h1 className="text-lime-500 font-bold text-4xl">Register</h1>
+    <div className="flex h-screen items-center">
+    <form
+      className="w-full p-8 flex flex-col items-center"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="w-[33%] flex flex-col items-center bg-gray-100 rounded-lg py-4">
+        <h1 className="text-lime-500 font-bold text-4xl">Register</h1>
         <Input
           {...register("username", { required: true })}
           placeholder="UserName"
-          className="w-2/12 mt-8 mb-2"
+          className="w-8/12 mt-8 mb-2"
         />
         {error && <p>user already exist please choose another one</p>}
         <Input
           type="password"
           placeholder="Password"
-          className="w-2/12 m-2"
+          className="w-8/12 m-2"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -54,7 +59,7 @@ export default function Register() {
         <Input
           type="password"
           placeholder="Confirm Password"
-          className="w-2/12 m-2"
+          className="w-8/12 m-2"
           {...register("confirmPassword", {
             required: "Please confirm your password",
             validate: (value) =>
@@ -76,5 +81,7 @@ export default function Register() {
         </div>
       </div>
     </form>
+    <Image width={650} height={250} src="./Laptop.svg" alt="laptop" />
+    </div>
   );
 }
