@@ -68,13 +68,13 @@ const CreateTask: React.FC = () => {
       </h2>
       <Card className="mt-8 bg-gray-100 w-4/12 max-h-screen mx-auto">
         <CardTitle className="flex justify-center my-2 font-bold text-xl">
-          <p>To do</p>
+          <p className="font-bold text-xl">To do</p>
         </CardTitle>
         <input
           type="text"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="w-11/12 h-10 my-2 mx-3 border p-2 rounded mb-2 gap-2"
+          className="w-11/12 h-10 my-2 ml-4 border p-2 rounded mb-2 gap-2"
           placeholder="Enter a new task title"
         />
         <textarea
@@ -82,14 +82,14 @@ const CreateTask: React.FC = () => {
           onChange={(e) =>
             setNewTask({ ...newTask, description: e.target.value })
           }
-          className="w-11/12 h-32 mx-3 my-2 p-2 border rounded mb-2 resize-none"
+          className="w-11/12 h-32 ml-4 my-2 p-2 border rounded mb-2 resize-none"
           placeholder="Enter task description"
           rows={3}
         />
         <textarea
           value={newTask.deadline}
           onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
-          className="w-11/12 h-16 mx-3 my-2 p-2 border rounded mb-2 resize-none"
+          className="w-11/12 h-16 ml-4 my-2 p-2 border rounded mb-2 resize-none"
           placeholder="Enter Deadline"
           rows={3}
         />
@@ -101,7 +101,7 @@ const CreateTask: React.FC = () => {
               priority: e.target.value as Task["priority"],
             })
           }
-          className="w-11/12 h-12 mx-3 p-2 border rounded mb-2"
+          className="w-11/12 h-12 ml-4 p-2 border rounded mb-2"
         >
           <option value="Low">Low </option>
           <option value="Medium">Medium </option>
@@ -109,14 +109,14 @@ const CreateTask: React.FC = () => {
         </select>
         <div className="flex mt-60 mb-2">
           <Link
-            className="bg-red-500 text-white p-2 flex w-full justify-center ml-2 rounded hover:bg-red-600"
+            className="bg-red-500 text-white p-2 flex w-full justify-center ml-4 rounded hover:bg-red-600"
             href="/dashboard/my-task"
           >
             Cancel
           </Link>
           <button
             onClick={addTask}
-            className="bg-lime-500 text-white p-2 rounded hover:bg-lime-600 w-full flex mx-3 justify-center"
+            className="bg-lime-500 text-white mr-4 p-2 rounded hover:bg-lime-600 w-full flex mx-3 justify-center"
           >
             Save
           </button>

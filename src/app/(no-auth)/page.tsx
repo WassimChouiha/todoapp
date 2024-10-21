@@ -16,13 +16,13 @@ export default function Home() {
         <div className="mt-8 flex gap-8">
           <Link
             href="/register"
-            className="text-xl p-2 rounded bg-lime-500 hover:bg-lime-600"
+            className="text-xl p-2 w-32 h-12 text-center rounded bg-lime-500 hover:bg-lime-600"
           >
             Register
           </Link>
           <Link
             href="/login"
-            className="border-[1px] text-xl p-2 rounded border-lime-500 text-lime-500 bg-white hover:bg-lime-50"
+            className="border-[1px] text-xl p-2 w-32 h-12 text-center rounded border-lime-500 text-lime-500 bg-white hover:bg-lime-50"
           >
             Log in
           </Link>
