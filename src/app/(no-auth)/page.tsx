@@ -16,7 +16,7 @@ export default function Home() {
         <div className="mt-8 flex gap-8">
           <Link
             href="/register"
-            className="text-xl p-2 w-32 h-12 text-center rounded bg-lime-500 hover:bg-lime-600"
+            className="text-xl p-2 w-32 h-12 text-center ml-4 rounded bg-lime-500 hover:bg-lime-600"
           >
             Register
           </Link>
