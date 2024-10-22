@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
           href="/"
         >
           <Image width={50} height={50} alt="logo" src="./Vector.svg" />
-          Lists
+          <p className="sm:hidden">Lists</p>
         </Link>
         <Link
           className="w-24 text-center h-12 mt-2 text-xl items-center flex justify-center text-white bg-lime-500 font-semibold rounded-lg  hover:bg-lime-600 focus:bg-lime-600 focus:outline-none focus:shadow-outline"

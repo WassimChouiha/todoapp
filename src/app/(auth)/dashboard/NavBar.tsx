@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
           href="/dashboard/my-task"
         >
           <Image width={50} height={50} alt="logo" src="./../Vector.svg" />
-          Lists
+          <p className="sm:hidden">Lists</p>
         </Link>
         <Button
           className="w-32 h-12 mt-2 text-xl bg-red-500 font-semibold rounded-lg hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:shadow-outline"
