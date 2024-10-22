@@ -86,7 +86,7 @@ const Tasks: React.FC = () => {
   });
 
   return (
-    <div className="2xl:w-4/6 xl:[100%] m-auto p-4 mt-8">
+    <div className="2xl:w-5/6 xl:w-[100%] m-auto p-4 mt-8">
       <div className="flex items-center text-gray-900 justify-between mt-8 mb-6">
         <h2 className="text-5xl text-lime-500 font-bold">My Tasks</h2>
         <Link
@@ -144,7 +144,7 @@ const Tasks: React.FC = () => {
         </select>
       </div>
       <div></div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-4">
         {(["To Do", "In Progress", "Done"] as const).map((status) => (
           <Card
             key={status}
