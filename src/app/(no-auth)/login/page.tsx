@@ -27,12 +27,12 @@ export default function Login() {
   };
 
   return (
-    <div className="flex h-screen items-center">
+    <div className="flex h-screen items-center sm:w-[420px]">
       <form
-        className="w-full flex flex-col items-center"
+        className="w-full flex flex-col items-center sm:w-[85%]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="w-[33%] flex flex-col items-center bg-gray-100 rounded-lg py-4">
+        <div className="w-[33%] flex flex-col items-center bg-gray-100 rounded-lg py-4 sm:w-[50%] lg:w-[50%]">
         <h1 className="text-lime-500 font-bold text-4xl mt-2">Login</h1>
         {error && <p>username or password incorrect</p>}
         <Input
@@ -48,7 +48,7 @@ export default function Login() {
           className="w-8/12 m-2"
         />
         {errors.password && <p>{errors.password.message}</p>}
-        <div className="w-full flex justify-around items-center p-2">
+        <div className="w-full flex justify-around items-center p-2 sm:flex-col sm:gap-2">
           <Button className="bg-lime-500 hover:bg-lime-600" type="submit">
             Log in
           </Button>
@@ -62,7 +62,7 @@ export default function Login() {
         </div>
       </form>
 
-      <Image width={650} height={250} src="./Laptop.svg" alt="laptop" />
+      <Image className="sm:hidden md:hidden" width={650} height={250} src="./Laptop.svg" alt="laptop" />
     </div>
   );
 }
